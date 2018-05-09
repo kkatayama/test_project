@@ -1,0 +1,36 @@
+# Download and unzip DVWA
+wget https://github.com/ethicalhack3r/DVWA/archive/master.zip -O dvwa.zip
+unzip dvwa.zip
+
+# Move dvwa to /var/www/html and setup permissions
+mv DVWA-master /var/www/html/dvwa
+cd /var/www/html
+chmod -R 755 dvwa/
+
+# Edit config file
+cd dvwa/config
+mv config.inc.php.dist config.inc.php
+pico config.inc.php
+
+## Change This
+  $_DVWA[ 'db_server' ]   = '127.0.0.1';
+  $_DVWA[ 'db_database' ] = 'dvwa';
+  $_DVWA[ 'db_user' ]     = 'root';
+  $_DVWA[ 'db_password' ] = 'p@ssw0rd';
+## To This
+  $_DVWA[ 'db_server' ]   = '127.0.0.1';
+  $_DVWA[ 'db_database' ] = 'dvwa';
+  $_DVWA[ 'db_user' ]     = 'user';
+  $_DVWA[ 'db_password' ] = 'password';
+
+# Create MySQL Database
+mysql -u root
+create database dvwa;
+CREATE USER 'user'@'127.0.0.1'IDENTIFIED BY 'password';
+grant all on dvwa.* to 'user'@'127.0.0.1';
+flush privileges;
+exit
+
+# Start Servers
+service mysql start
+service apache2 start

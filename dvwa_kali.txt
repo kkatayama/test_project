@@ -24,6 +24,7 @@ pico config.inc.php
   $_DVWA[ 'db_password' ] = 'password';
 
 # Create MySQL Database
+mysql -u root
 create database dvwa;
 CREATE USER 'user'@'127.0.0.1'IDENTIFIED BY 'password';
 grant all on dvwa.* to 'user'@'127.0.0.1';

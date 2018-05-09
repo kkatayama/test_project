@@ -30,3 +30,7 @@ CREATE USER 'user'@'127.0.0.1'IDENTIFIED BY 'password';
 grant all on dvwa.* to 'user'@'127.0.0.1';
 flush privileges;
 exit
+
+# Start Servers
+service mysql start
+service apache2 start
